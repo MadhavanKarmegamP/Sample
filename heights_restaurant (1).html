@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heights Rooftop Restaurant | Guindy, Chennai</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* ===== CSS CUSTOM PROPERTIES ===== */
+        :root {
+            --bg-primary: #0a0705;
+            --bg-secondary: #120f0c;
+            --accent-gold: #c9a84c;
+            --accent-champagne: #e8d5a3;
+            --text-primary: #f5f0e8;
+            --text-muted: #8a7a6a;
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(201, 168, 76, 0.2);
+            --gold-glow: rgba(201, 168, 76, 0.4);
+            
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-accent: 'Cinzel', serif;
+        }
+        
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        /* ===== CUSTOM CURSOR ===== */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease, opacity 0.2s ease;
+            mix-blend-mode: difference;
+        }
+        
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 500;
+        }
+        
+        .font-cinzel {
+            font-family: var(--font-accent);
+        }
+        
+        .text-gold {
+            color: var(--accent-gold);
+        }
+        
+        .text-champagne {
+            color: var(--accent-champagne);
+        }
+        
+        .text-muted {
+            color: var(--text-muted);
+        }
+        
+        /* ===== UTILITIES ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-padding {
+            padding: 8rem 0;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-col {
+            flex-direction: column;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .justify-center {
+            justify-content: center;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .grid {
+            display: grid;
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: -200% center;
+            }
+            50% {
+                background-position: 200% center;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            10% { transform: translate(-5%, -10%); }
+            20% { transform: translate(-15%, 5%); }
+            30% { transform: translate(7%, -25%); }
+            40% { transform: translate(-5%, 25%); }
+            50% { transform: translate(-15%, 10%); }
+            60% { transform: translate(15%, 0%); }
+            70% { transform: translate(0%, 15%); }
+            80% { transform: translate(3%, 35%); }
+            90% { transform: translate(-10%, 10%); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.4s ease;
+        }
+        
+        .navbar.scrolled {
+            background: rgba(10, 7, 5, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+        
+        .logo-name {
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+        }
+        
+        .logo-subtitle {
+            font-family: var(--font-accent);
+            font-size: 0.55rem;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent-gold);
+            cursor: pointer;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+        }
+        
+        .hero-canvas {
+            position: absolute;
+            inset: 0;
+        }
+        
+        .hero-grain {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            animation: grain 8s steps(10) infinite;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 1rem;
+        }
+        
+        .hero-label {
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            letter-spacing: 8px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        
+        .hero-title {
+            font-size: clamp(48px, 10vw, 140px);
+            font-style: italic;
+            font-weight: 500;
+            line-height: 0.9;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-title-line {
+            display: block;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-champagne);
+            border-color: var(--accent-champagne);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-gold);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (max-height: 600px) {
+            .scroll-indicator {
+                display: none;
+            }
+        }
+        
+        .scroll-text {
+            font-family: var(--font-accent);
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        .scroll-arrow {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent-gold), transparent);
+            animation: bounce 2s ease infinite;
+        }
+        
+        /* ===== EXPERIENCE STRIP ===== */
+        .experience-strip {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 3rem 0;
+        }
+        
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            position: relative;
+        }
+        
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60px;
+            background: var(--glass-border);
+        }
+        
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .stat-value::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            background-size: 200% auto;
+            opacity: 0.3;
+            animation: shimmer 3s ease infinite;
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        /* ===== ABOUT SECTION ===== */
+        .about-section {
+            background: var(--bg-primary);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        
+        .about-visual {
+            position: relative;
+            height: 500px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        /* CSS Art - Rooftop Scene */
+        .rooftop-scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .moon {
+            position: absolute;
+            top: 80px;
+            right: 100px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, var(--accent-champagne), var(--accent-gold));
+            border-radius: 50%;
+            box-shadow: 0 0 60px var(--accent-gold);
+        }
+        
+        .stars {
+            position: absolute;
+            inset: 0;
+        }
+        
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-champagne);
+            border-radius: 50%;
+            animation: starTwinkle 3s ease infinite;
+        }
+        
+        .building {
+            position: absolute;
+            bottom: 100px;
+            background: linear-gradient(to top, #1a1512, #2a221c);
+            border-top: 2px solid var(--glass-border);
+        }
+        
+        .building-1 { left: 10%; width: 60px; height: 120px; }
+        .building-2 { left: 20%; width: 80px; height: 160px; }
+        .building-3 { left: 45%; width: 50px; height: 100px; }
+        .building-4 { left: 65%; width: 70px; height: 140px; }
+        .building-5 { left: 85%; width: 60px; height: 110px; }
+        
+        .window {
+            position: absolute;
+            width: 10px;
+            height: 12px;
+            background: var(--accent-champagne);
+            opacity: 0.6;
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
+        
+        .railing {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to top, rgba(20,15,12,0.9), transparent);
+            border-top: 2px solid var(--glass-border);
+        }
+        
+        .railing-post {
+            position: absolute;
+            bottom: 0;
+            width: 4px;
+            height: 100px;
+            background: var(--glass-border);
+        }
+        
+        .about-content .section-label {
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .about-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+        
+        .about-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .about-highlights {
+            list-style: none;
+        }
+        
+        .about-highlights li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .about-highlights li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+        }
+        
+        /* ===== MENU HIGHLIGHTS ===== */
+        .menu-section {
+            background: var(--bg-secondary);
+        }
+        
+        .section-heading {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .dish-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-top: 3px solid var(--accent-gold);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dish-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(201, 168, 76, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px var(--gold-glow);
+            border-color: var(--accent-gold);
+        }
+        
+        .dish-card:hover::before {
+            opacity: 1;
+        }
+        
+        .dish-cuisine {
+            display: inline-block;
+            font-family: var(--font-accent);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .dish-name {
+            font-family: var(--font-accent);
+            font-size: 1.25rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.75rem;
+        }
+        
+        .dish-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .dish-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .dish-badge {
+            font-family: var(--font-accent);
+            font-size: 0.6rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            background: rgba(201, 168, 76, 0.08);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            padding: 0.3rem 0.7rem;
+            border-radius: 50px;
+        }
+
+        .dish-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .dish-dots span {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            opacity: 0.3;
+        }
+
+        .dish-dots span:first-child {
+            opacity: 1;
+        }
+        
+        /* ===== AMBIENCE SECTION ===== */
+        .ambience-section {
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ambience-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.03), transparent 70%);
+        }
+        
+        .ambience-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .feature-title {
+            font-family: var(--font-accent);
+            font-size: 1rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        .feature-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        
+        .testimonial {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .testimonial-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-style: italic;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .testimonial-author {
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+        }
+        
+        .testimonial-stars {
+            color: var(--accent-gold);
+            margin-top: 0.5rem;
+        }
+        
+        /* ===== FACILITIES GRID ===== */
+        .facilities-section {
+            background: var(--bg-secondary);
+        }
+        
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .facility-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .facility-item:hover {
+            border-color: var(--accent-gold);
+            transform: translateX(5px);
+        }
+        
+        .facility-icon {
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+        
+        .facility-text {
+            font-family: var(--font-accent);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+        }
+        
+        /* ===== RESERVATION & CONTACT ===== */
+        .reservation-section {
+            background: var(--bg-primary);
+        }
+        
+        .reservation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            color: var(--accent-gold);
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .contact-details h4 {
+            font-family: var(--font-accent);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-details p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        .platform-badges {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .platform-badge:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+        
+        .reservation-form {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: rgba(10, 7, 5, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c9a84c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem center;
+            padding-right: 3rem;
+            background-color: #0a0705;
+            color: var(--text-primary);
+        }
+        
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-select option {
+            background: #0a0705;
+            color: var(--text-primary);
+        }
+        
+        .form-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--accent-gold);
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-accent);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--bg-primary);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.8) sepia(1) saturate(3) hue-rotate(5deg) brightness(1.2);
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        /* ===== TOAST SUCCESS MESSAGE ===== */
+        .toast {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: linear-gradient(135deg, #0a0705, #1a1208);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 9999;
+            box-shadow: 0 8px 40px rgba(201, 168, 76, 0.3);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+            opacity: 0;
+            min-width: 320px;
+            max-width: 90vw;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--bg-primary);
+            font-size: 1.1rem;
+        }
+
+        .toast-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .toast-title {
+            font-family: var(--font-accent);
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+        }
+
+        .toast-body {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .form-btn:hover {
+            background: var(--accent-champagne);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--glass-border);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-accent);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            letter-spacing: 8px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-tagline {
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            font-family: var(--font-accent);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+        
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.1);
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .experience-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+            
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+            
+            .stat-item:nth-child(2)::after {
+                display: block;
+                position: absolute;
+                bottom: -3rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 1px;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-visual {
+                height: 400px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .ambience-features {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .facilities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .reservation-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 7, 5, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .experience-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .reservation-form {
+                padding: 2rem;
+            }
+            
+            .section-padding {
+                padding: 5rem 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .logo-name {
+                font-size: 1.25rem;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .stat-value {
+                font-size: 2.5rem;
+            }
+            
+            .section-heading {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Hide cursor on touch devices */
+        @media (hover: none) {
+            .cursor, .cursor-dot {
+                display: none;
+            }
+            
+            body {
+                cursor: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-name">HEIGHTS</span>
+                <span class="logo-subtitle">Rooftop Lounge</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#ambience">Ambience</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#reserve">Reserve</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <canvas class="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero-grain" aria-hidden="true"></div>
+        <div class="hero-content">
+            <span class="hero-label animate-fade-in-up" style="animation-delay: 0.2s;">Guindy, Chennai · Est. 2020</span>
+            <h1 class="hero-title animate-fade-in-up" style="animation-delay: 0.4s;">
+                <span class="hero-title-line">Dine Above</span>
+                <span class="hero-title-line">The City</span>
+            </h1>
+            <p class="hero-subtitle animate-fade-in-up" style="animation-delay: 0.6s;">
+                A rooftop experience where the Chennai skyline becomes your backdrop
+            </p>
+            <div class="hero-buttons animate-fade-in-up" style="animation-delay: 0.8s;">
+                <a href="#reserve" class="btn btn-primary">Reserve a Table</a>
+                <a href="#menu" class="btn btn-secondary">View Menu</a>
+            </div>
+        </div>
+        <div class="scroll-indicator animate-fade-in-up" style="animation-delay: 1s;">
+            <span class="scroll-text">Scroll</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+    
+    <!-- Experience Strip -->
+    <section class="experience-strip">
+        <div class="container">
+            <div class="experience-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-value">6 PM – 11 PM</div>
+                    <div class="stat-label">Daily Hours</div>
+                </div>
+                <div class="stat-item reveal" style="transition-delay: 0.1s;">
+                    <div class="stat-value">4.5★</div>
+                    <div class="stat-label">Google Rating</div>
+                </div>
+                <div class="stat-item reveal" style="transition-delay: 0.2s;">
+                    <div class="stat-value">7+</div>
+                    <div class="stat-label">Multi-Cuisine</div>
+                </div>
+                <div class="stat-item reveal" style="transition-delay: 0.3s;">
+                    <div class="stat-value">Rooftop</div>
+                    <div class="stat-label">City View Dining</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about-section section-padding" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual reveal">
+                    <div class="rooftop-scene" role="img" aria-label="Decorative illustration of Chennai city rooftop skyline at night">
+                        <div class="moon"></div>
+                        <div class="stars" id="stars-container"></div>
+                        <div class="building building-1">
+                            <div class="window" style="top: 20px; left: 15px;"></div>
+                            <div class="window" style="top: 40px; left: 35px;"></div>
+                            <div class="window" style="top: 60px; left: 15px;"></div>
+                            <div class="window" style="top: 80px; left: 35px;"></div>
+                        </div>
+                        <div class="building building-2">
+                            <div class="window" style="top: 20px; left: 20px;"></div>
+                            <div class="window" style="top: 20px; left: 50px;"></div>
+                            <div class="window" style="top: 50px; left: 20px;"></div>
+                            <div class="window" style="top: 50px; left: 50px;"></div>
+                            <div class="window" style="top: 80px; left: 20px;"></div>
+                            <div class="window" style="top: 80px; left: 50px;"></div>
+                            <div class="window" style="top: 110px; left: 20px;"></div>
+                            <div class="window" style="top: 110px; left: 50px;"></div>
+                        </div>
+                        <div class="building building-3">
+                            <div class="window" style="top: 20px; left: 15px;"></div>
+                            <div class="window" style="top: 40px; left: 30px;"></div>
+                            <div class="window" style="top: 60px; left: 15px;"></div>
+                        </div>
+                        <div class="building building-4">
+                            <div class="window" style="top: 20px; left: 20px;"></div>
+                            <div class="window" style="top: 20px; left: 45px;"></div>
+                            <div class="window" style="top: 50px; left: 20px;"></div>
+                            <div class="window" style="top: 50px; left: 45px;"></div>
+                            <div class="window" style="top: 80px; left: 20px;"></div>
+                            <div class="window" style="top: 80px; left: 45px;"></div>
+                        </div>
+                        <div class="building building-5">
+                            <div class="window" style="top: 20px; left: 15px;"></div>
+                            <div class="window" style="top: 40px; left: 35px;"></div>
+                            <div class="window" style="top: 60px; left: 15px;"></div>
+                            <div class="window" style="top: 80px; left: 35px;"></div>
+                        </div>
+                        <div class="railing">
+                            <div class="railing-post" style="left: 10%;"></div>
+                            <div class="railing-post" style="left: 30%;"></div>
+                            <div class="railing-post" style="left: 50%;"></div>
+                            <div class="railing-post" style="left: 70%;"></div>
+                            <div class="railing-post" style="left: 90%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content reveal">
+                    <span class="section-label">Our Story</span>
+                    <h2>Where the City Becomes Your View</h2>
+                    <p>Perched above the pulse of Guindy, Heights Rooftop Restaurant transforms an ordinary dinner into a memory. With the Chennai skyline stretching before you and the warm glow of city lights below, every evening here is a celebration of the night. Whether it's a quiet dinner for two or a lively gathering with friends — Heights is where moments happen.</p>
+                    <ul class="about-highlights">
+                        <li>Rooftop Seating with Skyline View</li>
+                        <li>Multi-Cuisine Kitchen</li>
+                        <li>Lounge Atmosphere & Music</li>
+                        <li>Perfect for Couples & Celebrations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Menu Highlights -->
+    <section class="menu-section section-padding" id="menu">
+        <div class="container">
+            <h2 class="section-heading reveal">Signature Dishes</h2>
+            <div class="menu-grid">
+                <div class="dish-card reveal">
+                    <span class="dish-cuisine">Chinese</span>
+                    <h3 class="dish-name">Dragon Chicken</h3>
+                    <p class="dish-desc">Crispy chicken tossed in fiery dragon sauce</p>
+                    <div class="dish-footer">
+                        <span class="dish-badge">Must Try</span>
+                        <div class="dish-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+                <div class="dish-card reveal" style="transition-delay: 0.1s;">
+                    <span class="dish-cuisine">Seafood</span>
+                    <h3 class="dish-name">Dynamite Prawns</h3>
+                    <p class="dish-desc">Golden fried prawns with explosive dynamite glaze</p>
+                    <div class="dish-footer">
+                        <span class="dish-badge">Chef's Pick</span>
+                        <div class="dish-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+                <div class="dish-card reveal" style="transition-delay: 0.2s;">
+                    <span class="dish-cuisine">North Indian</span>
+                    <h3 class="dish-name">Paneer Kurkure</h3>
+                    <p class="dish-desc">Crunchy paneer bites with house spice blend</p>
+                    <div class="dish-footer">
+                        <span class="dish-badge">Crowd Favourite</span>
+                        <div class="dish-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+                <div class="dish-card reveal" style="transition-delay: 0.3s;">
+                    <span class="dish-cuisine">North Indian</span>
+                    <h3 class="dish-name">Malai Kofta</h3>
+                    <p class="dish-desc">Velvety cottage cheese dumplings in rich cream gravy</p>
+                    <div class="dish-footer">
+                        <span class="dish-badge">Must Try</span>
+                        <div class="dish-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+                <div class="dish-card reveal" style="transition-delay: 0.4s;">
+                    <span class="dish-cuisine">Chettinad</span>
+                    <h3 class="dish-name">Chettinad Chicken Curry</h3>
+                    <p class="dish-desc">Aromatic Chettinad spices slow-cooked to perfection</p>
+                    <div class="dish-footer">
+                        <span class="dish-badge">House Special</span>
+                        <div class="dish-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+                <div class="dish-card reveal" style="transition-delay: 0.5s;">
+                    <span class="dish-cuisine">Beverages</span>
+                    <h3 class="dish-name">Signature Mocktails</h3>
+                    <p class="dish-desc">Crafted in-house blends for the perfect night out</p>
+                    <div class="dish-footer">
+                        <span class="dish-badge">Fan Favourite</span>
+                        <div class="dish-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Ambience Section -->
+    <section class="ambience-section section-padding" id="ambience">
+        <div class="container">
+            <h2 class="section-heading reveal">The Heights Experience</h2>
+            <div class="ambience-features">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i data-lucide="building-2" style="color: var(--accent-gold);"></i>
+                    </div>
+                    <h3 class="feature-title">Rooftop Skyline</h3>
+                    <p class="feature-desc">Watch Chennai glow as you dine under the open sky</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                    <div class="feature-icon">
+                        <i data-lucide="music" style="color: var(--accent-gold);"></i>
+                    </div>
+                    <h3 class="feature-title">Lounge Music</h3>
+                    <p class="feature-desc">Curated music sets that set the perfect evening mood</p>
+                </div>
+                <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                    <div class="feature-icon">
+                        <i data-lucide="camera" style="color: var(--accent-gold);"></i>
+                    </div>
+                    <h3 class="feature-title">Instagram-Ready</h3>
+                    <p class="feature-desc">Every corner designed for memories worth sharing</p>
+                </div>
+            </div>
+            <div class="testimonial reveal">
+                <p class="testimonial-text">"The view alone is worth it. The city looks magical from up there."</p>
+                <p class="testimonial-author">Google Review</p>
+                <div class="testimonial-stars">★★★★★</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Facilities Grid -->
+    <section class="facilities-section section-padding">
+        <div class="container">
+            <h2 class="section-heading reveal">What We Offer</h2>
+            <div class="facilities-grid">
+                <div class="facility-item reveal">
+                    <i data-lucide="car" class="facility-icon"></i>
+                    <span class="facility-text">Free Parking</span>
+                </div>
+                <div class="facility-item reveal" style="transition-delay: 0.1s;">
+                    <i data-lucide="wifi" class="facility-icon"></i>
+                    <span class="facility-text">Free Wi-Fi</span>
+                </div>
+                <div class="facility-item reveal" style="transition-delay: 0.2s;">
+                    <i data-lucide="circle-help" class="facility-icon"></i>
+                    <span class="facility-text">Wheelchair Access</span>
+                </div>
+                <div class="facility-item reveal" style="transition-delay: 0.3s;">
+                    <i data-lucide="users" class="facility-icon"></i>
+                    <span class="facility-text">Family Seating</span>
+                </div>
+                <div class="facility-item reveal" style="transition-delay: 0.4s;">
+                    <i data-lucide="party-popper" class="facility-icon"></i>
+                    <span class="facility-text">Group Dining</span>
+                </div>
+                <div class="facility-item reveal" style="transition-delay: 0.5s;">
+                    <i data-lucide="chair" class="facility-icon"></i>
+                    <span class="facility-text">Indoor & Outdoor Seating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Reservation & Contact -->
+    <section class="reservation-section section-padding" id="reserve">
+        <div class="container">
+            <div class="reservation-grid">
+                <div class="contact-info reveal">
+                    <h3>Find Us</h3>
+                    <div class="contact-item">
+                        <i data-lucide="map-pin" class="contact-icon"></i>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>No.86, Block No.5, Manickam Lane, Anna Salai, Guindy, Chennai 600032</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="phone" class="contact-icon"></i>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+91 89399 92112</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i data-lucide="clock" class="contact-icon"></i>
+                        <div class="contact-details">
+                            <h4>Hours</h4>
+                            <p>Daily 6:00 PM – 11:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="platform-badges">
+                        <a href="https://www.swiggy.com/dineout" target="_blank" rel="noopener noreferrer" class="platform-badge">
+                            <i data-lucide="utensils" style="width:14px;height:14px;"></i>
+                            Swiggy Dineout
+                        </a>
+                        <a href="https://www.eazydiner.com" target="_blank" rel="noopener noreferrer" class="platform-badge">
+                            <i data-lucide="utensils" style="width:14px;height:14px;"></i>
+                            EazyDiner
+                        </a>
+                    </div>
+                </div>
+                <form class="reservation-form reveal" id="reservation-form">
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" name="name" class="form-input" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" name="phone" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" name="date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Number of Guests</label>
+                        <select name="guests" class="form-select" required>
+                            <option value="">Select guests</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5 Guests</option>
+                            <option value="6">6 Guests</option>
+                            <option value="7">7 Guests</option>
+                            <option value="8">8 Guests</option>
+                            <option value="9">9 Guests</option>
+                            <option value="10">10+ Guests</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Special Request (Optional)</label>
+                        <textarea name="message" class="form-textarea" placeholder="Any special requirements or occasions?"></textarea>
+                    </div>
+                    <button type="submit" class="form-btn">Request Reservation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">HEIGHTS</div>
+            <p class="footer-tagline">Rooftop Dining · Guindy, Chennai</p>
+            <ul class="footer-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#ambience">Ambience</a></li>
+                <li><a href="#reserve">Reserve</a></li>
+            </ul>
+            <p class="footer-copyright" id="footer-copyright"></p>
+        </div>
+    </footer>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="reservation-toast">
+        <div class="toast-icon">✓</div>
+        <div class="toast-text">
+            <span class="toast-title">Request Received!</span>
+            <span class="toast-body">We'll contact you shortly to confirm your table.</span>
+        </div>
+    </div>
+
+    <script>
+        // ===== CUSTOM CURSOR =====
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX - 10 + 'px';
+            cursor.style.top = e.clientY - 10 + 'px';
+            cursorDot.style.left = e.clientX - 3 + 'px';
+            cursorDot.style.top = e.clientY - 3 + 'px';
+        });
+        
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'scale(0.8)';
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'scale(1)';
+        });
+        
+        // Hover effect for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, input, select, textarea');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursor.style.borderColor = 'var(--accent-champagne)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.borderColor = 'var(--accent-gold)';
+            });
+        });
+        
+        // ===== NAVBAR SCROLL EFFECT =====
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // ===== MOBILE MENU =====
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu on outside click
+        document.addEventListener('click', (e) => {
+            if (!navbar.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        // ===== SCROLL REVEAL ANIMATION =====
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+        
+        // ===== HERO CANVAS PARTICLES =====
+        const canvas = document.querySelector('.hero-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let particles = [];
+        const particleCount = 80;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+                this.twinkleDir = 1;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                // Twinkle effect
+                this.opacity += this.twinkleSpeed * this.twinkleDir;
+                if (this.opacity >= 0.8 || this.opacity <= 0.2) {
+                    this.twinkleDir *= -1;
+                }
+                
+                // Wrap around screen
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(201, 168, 76, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+        
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        
+        initParticles();
+        animateParticles();
+        
+        // ===== GENERATE STARS FOR ABOUT SECTION =====
+        const starsContainer = document.getElementById('stars-container');
+        for (let i = 0; i < 30; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 60 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+        
+        // ===== RESERVATION FORM =====
+        const reservationForm = document.getElementById('reservation-form');
+        
+        reservationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(reservationForm);
+            const data = Object.fromEntries(formData);
+
+            // Show styled toast
+            const toast = document.getElementById('reservation-toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+
+            // Reset form
+            reservationForm.reset();
+        });
+        
+        // ===== SET MIN DATE FOR DATE PICKER =====
+        const dateInput = document.querySelector('input[type="date"]');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+        }
+        
+        // ===== SMOOTH SCROLL FOR NAV LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // ===== DYNAMIC COPYRIGHT YEAR =====
+        document.getElementById('footer-copyright').textContent = 
+            `© ${new Date().getFullYear()} Heights Rooftop Restaurant. All rights reserved.`;
+
+        // ===== INITIALIZE LUCIDE ICONS =====
+        lucide.createIcons();
+    </script>
+</body>
+</html>
